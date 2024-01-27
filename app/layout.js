@@ -7,12 +7,15 @@ export const metadata = {
   title: "SignCom",
   description: "App Created by ZIA",
   url: "https://signcom.vercel.app",
-  image: "https://signcom.vercel.app/images/og.png",
+  image: '../assets/logo.png',
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link type="icon" href="../assets/logo.png"/>
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );
