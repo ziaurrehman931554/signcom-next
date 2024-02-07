@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import "./globals.css";
 
 export default function Home() {
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const [windowHeight, setWindowHeight] = useState(innerHeight);
   const [hasPermission, setHasPermission] = useState(false);
   const [text, setText] = useState("This is container where the text of the signs are displayed.");
   const [cameraType, setCameraType] = useState('front');
