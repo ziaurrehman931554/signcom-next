@@ -1,9 +1,12 @@
 'use client'
+
 import React, { useState, useEffect } from 'react';
+import Webcam from 'react-webcam';
+
 import "./globals.css";
 
 export default function Home() {
-  const windowHeight = window.innerHeight;
+  const windowHeight = 800;
   const [hasPermission, setHasPermission] = useState(false);
   const [text, setText] = useState("This is container where the text of the signs are displayed.");
   const [cameraType, setCameraType] = useState('front');
@@ -12,9 +15,7 @@ export default function Home() {
 
   useEffect(() => {
     (async () => {
-      const { status } = await navigator.mediaDevices.getUserMedia({ video: true });
-      console.log(status);
-      setHasPermission(status === "granted");
+      setHasPermission(true);
     })();
   }, []);
 
@@ -26,7 +27,7 @@ export default function Home() {
   }
 
   const handleEndCall = () => {
-    setIsCallOngoing(false);
+    setIsCallOngoing((prev) => !prev);
   };
 
   const toggleCameraType = () => {
@@ -49,7 +50,18 @@ export default function Home() {
             </div>
             <div style={{ borderWidth: 15, bottom: 0, overflow: "hidden", height: 211, borderWidth: 1, width: '37%', borderRadius: 11, margin: 3, backgroundColor: 'black', borderColor: '#74ACD9', }}>
               {isCallOngoing && (
-                <video style={{ width: '100%', height: '100%' }} autoPlay />
+                <Webcam
+                  style={{ height: '100%', width: '100%' }}
+                  audio={false}
+                  screenshotFormat="image/jpeg"
+                  videoConstraints={{
+                    width: { min: 148, max: 148 },
+                    height: { min: 211, max: 211 },
+                    aspectRatio: 138 / 211,
+                    facingMode: cameraType === 'front' ? 'user' : 'environment',
+                  }}
+                  mirrored={cameraType === 'front' ? true : false}
+                />
               )}
             </div>
           </div>
@@ -65,9 +77,22 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <div style={{ height: (windowHeight - (windowHeight * 10 / 100) - 190), marginTop: 5, overflow: "hidden", top: 0, zIndex: 1, width: '95%', borderRadius: 20, borderWidth: 1, borderColor: '#74ACD9', borderWidth: 2, backgroundColor: 'black' }}>
+        <div style={{ height: (windowHeight - (windowHeight * 10 / 100) - 190), marginTop: 5, overflow: "hidden", top: 0, zIndex: 1, width: '95%', borderRadius: 20, borderWidth: 1, borderColor: '#74ACD9', borderWidth: 2, backgroundColor: 'grey' }}>
           {isCallOngoing && (
-            <></>
+            <>
+              <Webcam
+                  style={{ height: '100%', width: '100%' }}
+                  audio={false}
+                  screenshotFormat="image/jpeg"
+                  videoConstraints={{
+                    width: { min: 148, max: 148 },
+                    height: { min: 211, max: 211 },
+                    aspectRatio: 138 / 211,
+                    facingMode: cameraType === 'front' ? 'user' : 'environment',
+                  }}
+                  mirrored={cameraType === 'front' ? true : false}
+                />
+            </>
           )}
         </div>
       </div>
