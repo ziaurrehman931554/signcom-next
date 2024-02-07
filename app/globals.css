@@ -4,30 +4,40 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-start: #8EDFEB;
+  --background-end: #5063BF;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground-rgb: 0, 0, 0;
+    --background-start: #8EDFEB;
+    --background-end: #5063BF;
   }
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  min-height: 100vh ;
+  flex: 1;
+}
+
+.background {
+  background-image: linear-gradient(to bottom, var(--background-start), var(--background-end));
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.nav{
+  height: 8vh;
+}
+.content {
+  height: 92vh;
+  align-items: flex-start;
 }
