@@ -111,6 +111,24 @@ body {
   height: 8vh;
 }
 
+@media screen and (max-width: 400px) {
+  .nav {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .navS{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .navL {
+    display: none;
+  }
+}
+
 .content {
   height: 92vh;
   align-items: flex-start;

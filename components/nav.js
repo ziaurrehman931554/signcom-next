@@ -61,10 +61,10 @@ export default function Nav() {
                     <h1 className='text-blue-400 mt-1'>SignCom</h1>
                 </a>
             </div>
-            <div className='flex items-center gap-2 ml-60 w-96 p-2 rounded-full bg-cyan-600'>
+            <div className='flex navS items-center gap-2 ml-60 w-96 p-2 rounded-full bg-cyan-600'>
                 <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} className="w-full bg-transparent outline-none border-none placeholder-slate-100 text-black transition-all"  placeholder="🔎 Search" />
             </div>
-            <div className="flex-row p-1 gap-3">
+            <div className="flex-row p-1 gap-3 navL">
                 <ul className="flex gap-2">
                     <AnimatePresence>
                     {links.map((link) => {
