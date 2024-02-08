@@ -3,7 +3,7 @@
 import React, {useState} from 'react';
 import Image from 'next/image';
 import '../app/globals.css';
-import { cn } from '@/lib/utils';
+import { cn } from '../lib/utils';
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
@@ -14,20 +14,26 @@ import {
   useTransform,
 } from "framer-motion"
 
+import logButton from './logButton';
+
 export default function Nav() {
     const links = [
         {
-        path: "/",
-        name: "Home",
+            path: "/",
+            name: "Home",
         },
         {
-        path: "/about",
-        name: "About",
+            path: "/about",
+            name: "About",
         },
         {
-        path: "/login",
-        name: "Get Access",
+            path: "/login",
+            name: "Get Access",
         },
+        {
+            path: "/call",
+            name: "Call",
+        }
     ]
 
     const pathname = usePathname()
@@ -66,53 +72,55 @@ export default function Nav() {
             <div className="flex-row p-1 gap-3 navL">
                 <ul className="flex gap-2">
                     <AnimatePresence>
-                    {links.map((link) => {
-                        // eslint-disable-next-line react-hooks/rules-of-hooks
-                        const x = useMotionValue(0)
-                        // eslint-disable-next-line react-hooks/rules-of-hooks
-                        const y = useMotionValue(0)
-                        // eslint-disable-next-line react-hooks/rules-of-hooks
-                        const textX = useTransform(x, (latest) => latest * 0.5)
-                        // eslint-disable-next-line react-hooks/rules-of-hooks
-                        const textY = useTransform(y, (latest) => latest * 0.5)
-                        return (
-                        <motion.li
-                            onPointerMove={(event) => {
-                            const item = event.currentTarget
-                            setTransform(item, event, x, y)
-                            }}
-                            key={link.path}
-                            onPointerLeave={(event) => {
-                            x.set(0)
-                            y.set(0)
-                            }}
-                            style={{ x, y }}
-                        >
-                            <MotionLink
-                            className={cn(
-                                "font-medium relative rounded-xl text-sm py-2 px-4 transition-all duration-500 ease-out hover:bg-cyan-200",
-                                pathname === link.path ? "" : ""
-                            )}
-                            href={link.path}
+                        {links.map((link) => {
+                            // eslint-disable-next-line react-hooks/rules-of-hooks
+                            const x = useMotionValue(0)
+                            // eslint-disable-next-line react-hooks/rules-of-hooks
+                            const y = useMotionValue(0)
+                            // eslint-disable-next-line react-hooks/rules-of-hooks
+                            const textX = useTransform(x, (latest) => latest * 0.5)
+                            // eslint-disable-next-line react-hooks/rules-of-hooks
+                            const textY = useTransform(y, (latest) => latest * 0.5)
+                            return (
+                            <motion.li
+                                onPointerMove={(event) => {
+                                const item = event.currentTarget
+                                setTransform(item, event, x, y)
+                                }}
+                                key={link.path}
+                                onPointerLeave={(event) => {
+                                x.set(0)
+                                y.set(0)
+                                }}
+                                style={{ x, y }}
                             >
-                            <motion.span
-                                style={{ x: textX, y: textY }}
-                                className="z-10 relative"
-                            >
-                                {link.name}
-                            </motion.span>
-                            {pathname === link.path ? (
-                                <motion.div
-                                transition={{ type: "spring" }}
-                                layoutId="underline"
-                                className="absolute w-full h-full rounded-xl left-0 bottom-0 bg-red-300"
-                                ></motion.div>
-                            ) : null}
-                            </MotionLink>
-                        </motion.li>
-                        )
-                    })}
+                                <MotionLink
+                                className={cn(
+                                    "font-medium relative rounded-xl text-sm py-2 px-4 transition-all duration-500 ease-out hover:bg-cyan-200",
+                                    pathname === link.path ? "" : ""
+                                )}
+                                href={link.path}
+                                >
+                                <motion.span
+                                    style={{ x: textX, y: textY }}
+                                    className="z-10 relative"
+                                >
+                                    {link.name}
+                                </motion.span>
+                                {pathname === link.path ? (
+                                    <motion.div
+                                    transition={{ type: "spring" }}
+                                    layoutId="underline"
+                                    className="absolute w-full h-full rounded-xl left-0 bottom-0 bg-red-300"
+                                    ></motion.div>
+                                ) : null}
+                                </MotionLink>
+                            </motion.li>
+                            )
+                        })}
+                        {}
                     </AnimatePresence>
+                    <logButton />
                 </ul>
             </div>
         </section>
